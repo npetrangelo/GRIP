@@ -67,15 +67,15 @@ public class CropOperation implements Operation {
         final List<Number> y = ySocket.getValue().get();
 
         opencv_core.Range xRange = new opencv_core.Range(
-                input.arrayWidth() * (int) x.get(0).floatValue(),
-                input.arrayWidth() * (int) x.get(1).floatValue()
+                (int) (input.cols() * x.get(0).floatValue()),
+                (int) (input.cols() * x.get(1).floatValue())
         );
 
         opencv_core.Range yRange = new opencv_core.Range(
-                input.arrayWidth() * (int) y.get(0).floatValue(),
-                input.arrayWidth() * (int) y.get(1).floatValue()
+                (int) (input.rows() * y.get(0).floatValue()),
+                (int) (input.rows() * y.get(1).floatValue())
         );
 
-        outputSocket.setValue(input.apply(xRange, yRange));
+        outputSocket.setValue(input.apply(yRange, xRange));
     }
 }
