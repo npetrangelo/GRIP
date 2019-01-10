@@ -38,7 +38,7 @@ public class CropOperation implements Operation {
         this.xSocket = inputSocketFactory.create(SocketHints.Inputs
                 .createNumberListRangeSocketHint("x range", 0, 1));
         this.ySocket = inputSocketFactory.create(SocketHints.Inputs
-                .createNumberListRangeSocketHint("x range", 0, 1));
+                .createNumberListRangeSocketHint("y range", 0, 1));
 
         this.outputSocket = outputSocketFactory.create(SocketHints.Outputs
                 .createMatSocketHint("Output"));
@@ -66,14 +66,16 @@ public class CropOperation implements Operation {
         final List<Number> x = xSocket.getValue().get();
         final List<Number> y = ySocket.getValue().get();
 
-        final opencv_core.Mat output = outputSocket.getValue().get();
-
-        opencv_core.Rect crop = new opencv_core.Rect(input.arrayWidth() * (int) x.get(0).floatValue(),
-                input.arrayHeight() * (int) y.get(0).floatValue(),
-                input.arrayWidth() * (int) (x.get(1).floatValue() - x.get(0).floatValue()),
-                input.arrayHeight() * (int) (y.get(1).floatValue() - y.get(0).floatValue())
+        opencv_core.Range xRange = new opencv_core.Range(
+                input.arrayWidth() * (int) x.get(0).floatValue(),
+                input.arrayWidth() * (int) x.get(1).floatValue()
         );
 
-        outputSocket.setValue(input.apply(crop));
+        opencv_core.Range yRange = new opencv_core.Range(
+                input.arrayWidth() * (int) y.get(0).floatValue(),
+                input.arrayWidth() * (int) y.get(1).floatValue()
+        );
+
+        outputSocket.setValue(input.apply(xRange, yRange));
     }
 }
