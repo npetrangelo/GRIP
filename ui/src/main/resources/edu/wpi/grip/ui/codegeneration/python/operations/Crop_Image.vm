@@ -1,5 +1,5 @@
     @staticmethod
-    def $tMeth.name($step.name())(input, x, y, interpolation):
+    def $tMeth.name($step.name())(input, x, y):
         """Crop an image to an exact size.
         Args:
             input: A numpy.ndarray.
@@ -8,4 +8,5 @@
         Returns:
             A numpy.ndarray of the cropped image.
         """
-        return input[y[0]:y[1], x[0]:x[1]]
+        h, w = input.shape
+        return input[int(h*y[0]):int(h*y[1]), int(w*x[0]):int(w*x[1])]
