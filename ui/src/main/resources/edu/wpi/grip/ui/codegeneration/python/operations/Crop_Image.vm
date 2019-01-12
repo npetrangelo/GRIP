@@ -1,0 +1,11 @@
+    @staticmethod
+    def $tMeth.name($step.name())(input, x, y, interpolation):
+        """Crop an image to an exact size.
+        Args:
+            input: A numpy.ndarray.
+            x: A list of two numbers the are the sides of the ROI.
+            y: A list of two numbers the are the top and bottom of the ROI.
+        Returns:
+            A numpy.ndarray of the cropped image.
+        """
+        return input[y[0]:y[1], x[0]:x[1]]

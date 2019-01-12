@@ -1,6 +1,6 @@
     @staticmethod
     def $tMeth.name($step.name())(input, width, height, interpolation):
-        """Scales and image to an exact size.
+        """Scales an image to an exact size.
         Args:
             input: A numpy.ndarray.
             Width: The desired width in pixels.
