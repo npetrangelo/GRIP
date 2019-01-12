@@ -1,19 +1,19 @@
 	/**
-	 * Scales and image to an exact size.
+	 * Crop an image to an exact size.
 	 * @param input The image on which to perform the Crop.
 	 * @param x An array of two numbers the are the sides of the ROI.
 	 * @param y An array of two numbers the are the top and bottom of the ROI.
 	 */
 	private Mat $tMeth.name($step.name())(Mat input, double[] x, double[] y) {
-		core.Range xRange = new Range(
+		core.Range xRange = new core.Range(
 			(int) (input.cols() * x.get(0).floatValue()),
 			(int) (input.cols() * x.get(1).floatValue())
 		);
 
-		core.Range yRange = new Range(
+		core.Range yRange = new core.Range(
 			(int) (input.rows() * y.get(0).floatValue()),
 			(int) (input.rows() * y.get(1).floatValue())
 		);
 
-		return input.apply(yRange, xRange));
+		return input.apply(yRange, xRange);
 	}
