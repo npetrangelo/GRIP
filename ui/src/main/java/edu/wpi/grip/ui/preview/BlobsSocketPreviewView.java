@@ -58,7 +58,7 @@ public final class BlobsSocketPreviewView extends ImageBasedPreviewView<BlobsRep
   protected void convertImage() {
     synchronized (this) {
       final BlobsReport blobsReport = this.getSocket().getValue().get();
-      final Mat input = blobsReport.getInput();
+      final Mat input = blobsReport.getInput().getCpu();
 
       if (input.channels() == 3) {
         input.copyTo(tmp);
@@ -83,7 +83,7 @@ public final class BlobsSocketPreviewView extends ImageBasedPreviewView<BlobsRep
       final Mat output = tmp;
       final int numBlobs = blobsReport.getBlobs().size();
       platform.runAsSoonAsPossible(() -> {
-        final Image image = this.imageConverter.convert(output, getImageHeight());
+        final Image image = this.imageConverter.convert(output);
         this.imageView.setImage(image);
         this.infoLabel.setText("Found " + numBlobs + " blobs");
       });

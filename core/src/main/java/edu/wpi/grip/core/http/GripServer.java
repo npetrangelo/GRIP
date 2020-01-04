@@ -92,7 +92,7 @@ public class GripServer {
    * <p>For example, performing a {@code GET} request on the path
    * {@code /GRIP/data?foo&bar} will return a map such as
    * <br>
-   * <code><pre>
+   * <pre><code>
    * {
    *   'foo': {
    *        // data
@@ -102,7 +102,7 @@ public class GripServer {
    *       // data
    *     }
    * }
-   * </pre></code>
+   * </code></pre>
    */
   public static final String DATA_PATH = ROOT_PATH + "/data";
 
@@ -217,17 +217,10 @@ public class GripServer {
    */
   public void restart() {
     try {
-      if (state == State.RUNNING) {
-        try {
-          server.stop();
-        } catch (Exception ex) {
-          throw new GripServerException("Could not stop Jetty server", ex);
-        }
-        state = State.STOPPED;
-      }
+      stop();
       server = serverFactory.create(port);
       start();
-    } catch (GripServerException | IllegalStateException ex) {
+    } catch (IllegalStateException ex) {
       throw new GripServerException("Could not restart GripServer", ex);
     }
   }

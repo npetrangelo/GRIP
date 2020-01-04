@@ -69,7 +69,7 @@ public final class LinesSocketPreviewView extends ImageBasedPreviewView<LinesRep
     synchronized (this) {
       final LinesReport linesReport = this.getSocket().getValue().get();
       final List<LinesReport.Line> lines = linesReport.getLines();
-      Mat input = linesReport.getInput();
+      Mat input = linesReport.getInput().getCpu();
 
       // If there were lines found, draw them on the image before displaying it
       if (!linesReport.getLines().isEmpty()) {
@@ -100,7 +100,7 @@ public final class LinesSocketPreviewView extends ImageBasedPreviewView<LinesRep
       final Mat convertInput = input;
       final int numLines = lines.size();
       platform.runAsSoonAsPossible(() -> {
-        final Image image = this.imageConverter.convert(convertInput, getImageHeight());
+        final Image image = this.imageConverter.convert(convertInput);
         this.imageView.setImage(image);
         this.infoLabel.setText("Found " + numLines + " lines");
       });

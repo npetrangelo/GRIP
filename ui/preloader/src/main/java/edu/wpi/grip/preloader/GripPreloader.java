@@ -18,8 +18,8 @@ import javafx.util.Duration;
 
 public final class GripPreloader extends Preloader {
 
-  private static final Color primaryColor = Color.gray(0.075);
-  private static final Color secondaryColor = Color.gray(0.1);
+  private static final Color primaryColor = Color.gray(0.925);
+  private static final Color secondaryColor = Color.WHITE;
 
   // Animation timings
   private static final double minTime = 1 / 3.0;
@@ -28,10 +28,6 @@ public final class GripPreloader extends Preloader {
   private static final double HEXAGON_RADIUS = 12;
 
   private Stage preloaderStage;
-
-  public static void main(String[] args) {
-    launch(args);
-  }
 
   @Override
   public void start(Stage preloaderStage) throws IOException {

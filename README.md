@@ -1,11 +1,10 @@
 ![logo](https://cloud.githubusercontent.com/assets/3964980/11156885/6fa1967a-8a1c-11e5-8c78-e552ffba31c0.png)
 
 [![Join the chat at https://gitter.im/WPIRoboticsProjects/GRIP](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/WPIRoboticsProjects/GRIP?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Build Status](https://travis-ci.org/WPIRoboticsProjects/GRIP.svg?branch=master)](https://travis-ci.org/WPIRoboticsProjects/GRIP)
-[![Build status](https://ci.appveyor.com/api/projects/status/sbrd2nhpiktlhf58/branch/master?svg=true)](https://ci.appveyor.com/project/JLLeitschuh/grip/branch/master)
+[![Build Status](https://dev.azure.com/wpiroboticsprojects/GRIP/_apis/build/status/WPIRoboticsProjects.GRIP?branchName=master)](https://dev.azure.com/wpiroboticsprojects/GRIP/_build/latest?definitionId=1?branchName=master)
 [![codecov.io](http://codecov.io/github/WPIRoboticsProjects/GRIP/coverage.svg?branch=master)](http://codecov.io/github/WPIRoboticsProjects/GRIP?branch=master)
-[![Dependency Status](https://www.versioneye.com/user/projects/56aaaac57e03c7003ba40ab6/badge.svg?style=plastic)](https://www.versioneye.com/user/projects/56aaaac57e03c7003ba40ab6)
 [![Github Releases](https://img.shields.io/github/downloads/WPIRoboticsProjects/GRIP/total.svg)](https://github.com/WPIRoboticsProjects/GRIP/releases/latest)
+
 
 # GRIP Computer Vision Engine
 
@@ -23,13 +22,14 @@ As a result, many teams with minimal computer vision knowledge successfully used
  - Extensible!
  - Deploys and runs headless.
  - Supports various network protocols
-   - [Network Tables](https://github.com/PeterJohnson/ntcore)
+   - [Network Tables](https://github.com/wpilibsuite/allwpilib/tree/master/ntcore/)
    - [Robot Operating System (ROS)](http://www.ros.org/)
    - HTTP
+ - CUDA acceleration
  - OS Support:
      - Windows
      - OSX
-     - Linux
+     - Linux (minimum Ubuntu 18.04 or libc version 2.27+)
      - Embedded Linux ARM (NI RoboRIO)
 
 
@@ -40,6 +40,10 @@ As a result, many teams with minimal computer vision knowledge successfully used
 3. Open GRIP
 
 Check out the release notes and [the wiki](https://github.com/WPIRoboticsProjects/GRIP/wiki) for more information.
+
+Note for Linux users: GRIP requires GTK2 to be installed. Most Ubuntu-based distributions include it,
+but some other distros such as Arch may require it to be manually installed. GRIP also requires libc version 2.27
+or higher; for Ubuntu-based distributions, this requires Ubuntu 18.04 or newer.
 
 ## Building GRIP From Source
 
@@ -53,11 +57,16 @@ On Windows:
 
 If you don't have an internet connection you can build using the `--offline` flag if you have built GRIP once before.
 
+## CUDA Support
+To enable CUDA acceleration, CUDA 10.0 needs to be installed on your computer. CUDA 10.1 may work on
+Linux systems, but Windows _must_ use 10.0.
+
+When running or building from source, add the Gradle flag `-Pcuda` to enable CUDA acceleration (eg `./gradlew :ui:run -Pcuda`)
+
+Note that CUDA acceleration is not available for all operations.
+
+Code generation does not support CUDA - it is only used for operations running in GRIP.
+
 ## Contributing
 
 See the guide on [setting up build tools](https://github.com/WPIRoboticsProjects/GRIP/wiki/Setting-up-build-tools) in the wiki.
-
-## Thanks
-
-Thanks to [TravisCI](https://travis-ci.org/) and [AppVeyor](https://www.appveyor.com/) for providing their continuous integration 
-servers to open source projects for free.

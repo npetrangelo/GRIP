@@ -32,15 +32,15 @@ public class TInput extends TSocket {
    * @return returns the value of the output in the form of a string.
    */
   public String value() {
-    if (value != null) {
-      return value;
-    } else {
+    if (value == null) {
       return connectedOutput.name();
+    } else {
+      return value;
     }
   }
 
   @Override
-  String baseTypeHelper(String type) {
+  protected String baseTypeHelper(String type) {
     if ("Integer".equals(type)) {
       return "int";
     }
@@ -49,6 +49,9 @@ public class TInput extends TSocket {
     }
     if ("Double".equals(type)) {
       return "double";
+    }
+    if ("MatWrapper".equals(type)) {
+      return "Mat";
     }
     return type;
   }

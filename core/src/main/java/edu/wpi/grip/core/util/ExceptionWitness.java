@@ -13,9 +13,12 @@ import javax.annotation.Nullable;
 
 /**
  * Witnesses and reports exception. <b>This class is not suitable to handle {@link Error
- * Errors}.</b><br /> {@link #flagException} should be used to flag the witness that an error has
- * has occurred. This will post an {@link ExceptionEvent} to the {@link EventBus}. <br /> <br />
- * Example Usage: <blockquote>
+ * Errors}.</b>
+ *
+ * <p>{@link #flagException} should be used to flag the witness that an error has
+ * has occurred. This will post an {@link ExceptionEvent} to the {@link EventBus}.
+ *
+ * <p>Example Usage: <blockquote>
  * <pre>
  * {@code
  * while(true){
@@ -33,6 +36,7 @@ import javax.annotation.Nullable;
 public class ExceptionWitness {
   private final EventBus eventBus;
   private final Object origin;
+  @SuppressWarnings("PMD.LinguisticNaming")
   private final AtomicBoolean isExceptionState = new AtomicBoolean(false);
 
   @Inject
@@ -60,7 +64,9 @@ public class ExceptionWitness {
   }
 
   /**
-   * @see #flagException(Exception, String).
+   * Indicates to the witness that an exception has occurred.
+   *
+   * @see #flagException(Exception, String)
    */
   public final void flagException(Exception exception) {
     flagException(exception, null);

@@ -58,7 +58,7 @@ public final class RectangleSocketPreviewView extends ImageBasedPreviewView<Rect
     synchronized (this) {
       final RectsReport report = this.getSocket().getValue().get();
       final List<Rect> rectangles = report.getRectangles();
-      Mat input = report.getImage();
+      Mat input = report.getImage().getCpu();
 
       if (input.channels() == 3) {
         input.copyTo(tmp);
@@ -78,7 +78,7 @@ public final class RectangleSocketPreviewView extends ImageBasedPreviewView<Rect
       final Mat convertInput = tmp;
       final int numRegions = rectangles.size();
       platform.runAsSoonAsPossible(() -> {
-        final Image image = this.imageConverter.convert(convertInput, getImageHeight());
+        final Image image = this.imageConverter.convert(convertInput);
         this.imageView.setImage(image);
         this.infoLabel.setText("Found " + numRegions + " regions of interest");
       });

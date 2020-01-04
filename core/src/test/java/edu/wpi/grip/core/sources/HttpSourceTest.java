@@ -1,5 +1,6 @@
 package edu.wpi.grip.core.sources;
 
+import edu.wpi.grip.core.MatWrapper;
 import edu.wpi.grip.core.Pipeline;
 import edu.wpi.grip.core.http.ContextStore;
 import edu.wpi.grip.core.http.GripServer;
@@ -11,14 +12,12 @@ import edu.wpi.grip.util.Files;
 
 import com.google.common.eventbus.EventBus;
 
-import org.apache.commons.httpclient.URIException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.FileEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.bytedeco.javacpp.opencv_core.Mat;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,7 +41,7 @@ public class HttpSourceTest {
   private CloseableHttpClient postClient;
 
   @Before
-  public void setUp() throws URIException, URISyntaxException {
+  public void setUp() throws URISyntaxException {
     GripServer.JettyServerFactory f = new GripServerTest.TestServerFactory();
     ContextStore contextStore = new ContextStore();
     server = GripServerTest.makeServer(contextStore, f, new Pipeline());
@@ -63,7 +62,7 @@ public class HttpSourceTest {
 
   @Test
   public void testPostImage() throws IOException, InterruptedException {
-    OutputSocket<Mat> imageSource = source.getOutputSockets().get(0);
+    OutputSocket<MatWrapper> imageSource = source.getOutputSockets().get(0);
 
     // We have to manually update the output sockets to get the image
     source.updateOutputSockets();

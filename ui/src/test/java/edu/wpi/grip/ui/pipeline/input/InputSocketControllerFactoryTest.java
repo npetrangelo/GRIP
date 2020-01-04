@@ -7,6 +7,7 @@ import edu.wpi.grip.core.operations.OperationsFactory;
 import edu.wpi.grip.core.operations.network.MockGripNetworkModule;
 import edu.wpi.grip.core.sockets.InputSocket;
 import edu.wpi.grip.ui.GripUiModule;
+import edu.wpi.grip.ui.UiTests;
 import edu.wpi.grip.util.GripCoreTestModule;
 
 import com.google.common.eventbus.EventBus;
@@ -14,8 +15,9 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.util.Modules;
 
-import org.junit.Before;
+import org.junit.After;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.testfx.framework.junit.ApplicationTest;
@@ -32,6 +34,7 @@ import static org.testfx.api.FxAssert.verifyThat;
 
 
 @RunWith(Parameterized.class)
+@Category(UiTests.class)
 public class InputSocketControllerFactoryTest extends ApplicationTest {
 
   private final OperationMetaData operationMeta;
@@ -93,8 +96,7 @@ public class InputSocketControllerFactoryTest extends ApplicationTest {
     stage.show();
   }
 
-  @Before
-  @SuppressWarnings("PMD.JUnit4TestShouldUseAfterAnnotation")
+  @After
   public void tearDown() {
     testModule.tearDown();
   }
